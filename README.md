@@ -1,53 +1,53 @@
 ﻿# FRC-8871-Reefscape
 This is the official repository for FRC team 8871, Saber Dynamics, 2025 Reefscape code.
 
-## TODO
+# TODO
 
 - Assign laptop numbers
 - Add names to GitHub account
 - Select a subsystem to join (elevator or pivot)
 
 ## Subsystems
-# Swerve subsystem
+### Swerve subsystem
 - Write functions
-# Elevator subsystem
+### Elevator subsystem
 - Write functions
-# Pivot subsystem
+### Pivot subsystem
 - idk
 
 ## Commands
-# Drive command
+### Drive command
 - Turn to command
 - Default command
-# Elevator commands
+### Elevator commands
 - PID command
 - Default command
-# Pivot commands
+### Pivot commands
 - PID command
 - Default command
 
 
 
 
-## GitHub terms
-# Code locations
+# GitHub terms
+## Code locations
 - repo/repository - A repository is where the code is stored. This could be locally on your device or remotely online.
 - local - When something is local, it is saved only on your device.
 - remote - When something is remote, it is saved online on GitHub.
 - main - The main branch is where all the code will eventually be. It is the main code.
 - branch - Branches are offshoots of the code. These are used to test and mess around with code without breaking and changing anything in the main branch.
-# Code editing
+## Code editing
 - commit - A commit saves and records any changes you have made to code. You are also required to write a "commit message" which describes what you did.
 - push - A push uploads your changes on your local branch to the remote branch.
 - pull - If changes are made to the remote repository, a pull updates your local repository to match it.
 - pull request - A pull request is a request to merge the updates you made on your branch to the main branch. If you edit file B, you can request the changes to be added to file A.
 
-## Git commands
-# Setting your username and email
+# Git commands
+## Setting your username and email
 git config --global user.name "YOUR NAME HERE"
 git config --global user.email "YOUR EMAIL HERE"
 
-# Checking and setting your branch
+## Checking and setting your branch
 git branch
 - If this command returns main, DO NOT PUSH YOUR CODE. Use the following commands.
 
