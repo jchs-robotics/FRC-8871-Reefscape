@@ -58,4 +58,7 @@ git switch EXISTING-BRANCH-NAME-HERE
 git checkout -b NEW-BRANCH-NAME-HERE
 - This command creates a new branch with your desired name and switches you to that branch. You can now safely push your code.
 
+git fetch --prune
+- This command removes old, deleted branches
+
 
