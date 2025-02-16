@@ -4,39 +4,31 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Subsystems.SwerveTuahSubsystem;
 import swervelib.SwerveInputStream;
+import java.io.File;
+
 
 public class RobotContainer {
 
   // initialize subsystems and commands here 
-  private final SwerveTuahSubsystem swerveTuahSubsystem = new SwerveTuahSubsystem();
+  private final SwerveTuahSubsystem swerveTuahSubsystem = new SwerveTuahSubsystem(new File(Filesystem.getDeployDirectory(),
+                                                                                         "swerve"));
 
   
   // initialize objects/variables here
-  private final XboxController driveController = new XboxController(0);
+  // private final XboxController driveController = new XboxController(0);
+  private final CommandXboxController driveController = new CommandXboxController(0);
  
 
 
 
-  /*
-   * Robot Container
-   * Contains things such as subsystems, commands, and more
-   */
-  public RobotContainer() {
-    configureBindings();
-    // swerveTuahSubsystem.setDefaultCommand(driveFieldOrientedAngularVelocity);
-    swerveTuahSubsystem.setDefaultCommand(driveOnThatThang);
-
-
-
-
-    
-  }
 
 
   /*
@@ -57,19 +49,36 @@ public class RobotContainer {
                                                                                               driveController::getRightY)
                                                                                               .headingWhile(true);
 
-    // what is this??
+    // drive + rotates facing controller pos
     Command driveFieldOrientedDirectAngle = swerveTuahSubsystem.driveFieldOriented(driveDirectAngle);
 
-    // drive command??
-    // Command driveFieldOrientedAngularVelocity = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
-    Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
+    // drive + rotate w/ velocity
+    Command driveFieldOrientedAngularVelocity = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
+    // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
 
   
 
+  /*
+   * Robot Container
+   * Contains things such as subsystems, commands, and more
+   */
+  public RobotContainer() {
+    configureBindings();
+    
 
 
 
-  private void configureBindings() {}
+
+    
+  }
+
+
+
+  private void configureBindings() {
+    swerveTuahSubsystem.setDefaultCommand(driveFieldOrientedAngularVelocity);
+    // swerveTuahSubsystem.setDefaultCommand(driveOnThatThang);
+
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");

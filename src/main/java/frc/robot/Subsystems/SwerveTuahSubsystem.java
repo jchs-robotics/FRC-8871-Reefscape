@@ -34,7 +34,7 @@ public class SwerveTuahSubsystem extends SubsystemBase {
 
 
     
-    public SwerveTuahSubsystem() {
+    public SwerveTuahSubsystem(File directory) {
         try
         {
         swerveDrive = new SwerveParser(directory).createSwerveDrive(Constants.MAX_SPEED,
