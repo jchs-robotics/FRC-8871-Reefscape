@@ -67,20 +67,22 @@ public class SwerveSubsystem extends SubsystemBase {
         *  In this case the gear ratio is 18.75 motor revolutions per wheel rotation.
         *  The encoder resolution per motor revolution is 1 per motor revolution. 
         */
-        double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(18.75); 
+
+        // double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(18.75); 
+      
         /* 
         *  Motor conversion factor is (PI * WHEEL DIAMETER IN METERS) / (GEAR RATIO * ENCODER RESOLUTION). // what the following method does
         *  In this case the wheel diameter is 4 inches, which must be converted to meters to get meters/second. 
         *  The gear ratio is 5.36 motor revolutions per wheel rotation.
         *  The encoder resolution per motor revolution is 1 per motor revolution.
         */
-        double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 5.36); 
+        // double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 5.36); 
        
-        // print these values
-        System.out.println("\"conversionFactor\": {");
-        System.out.println("\t\"angle\": " + angleConversionFactor + ",");
-        System.out.println("\t\"drive\": " + driveConversionFactor);
-        System.out.println("}");
+        // // print these values
+        // System.out.println("\"conversionFactor\": {");
+        // System.out.println("\t\"angle\": " + angleConversionFactor + ",");
+        // System.out.println("\t\"drive\": " + driveConversionFactor);
+        // System.out.println("}");
 
 
 
@@ -102,14 +104,9 @@ public class SwerveSubsystem extends SubsystemBase {
         //                                                             angleConversionFactor, 
         //                                                             driveConversionFactor); // method from last year
 
-        swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed,
+            swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed,
                                                   new Pose2d(new Translation2d(Meter.of(1), Meter.of(4)), 
                                                   Rotation2d.fromDegrees(0))); // includes pose2d (from yagsl)
-
-    
-    
-
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
