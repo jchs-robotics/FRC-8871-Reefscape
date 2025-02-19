@@ -42,8 +42,8 @@ public class RobotContainer {
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
    */
    SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),               // get the swerve drive object and get the controller joystick positions
-                                                                            () -> driveController.getLeftY() * -1,   // multiplied by -1 because joysticks are inverted
-                                                                            () -> driveController.getLeftX() * -1)   //                                                           
+                                                                            () -> -driveController.getLeftY(),   // multiplied by -1 because joysticks are inverted
+                                                                            () -> -driveController.getLeftX())   //                                                           
                                                                           .withControllerRotationAxis(driveController::getRightX) // rotation axis (sideways movement of joystick)
                                                                           .deadband(OperatorConstants.DEADBAND) // deadband so no stick drift
                                                                           .scaleTranslation(0.8) // TODO learn this
