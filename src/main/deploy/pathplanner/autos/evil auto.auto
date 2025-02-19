@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "infiltrate"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ballz"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "stalk the prey"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPINJITSU"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPINJITSU"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPINJITSU"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPINJITSU"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
