@@ -54,16 +54,10 @@ public class RobotContainer {
    */
     SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driveController::getRightX, // 
                                                                                               driveController::getRightY)
-                                                                                              .headingWhile(true);
+                                                                    .headingWhile(true);
 
-    // drive + rotates facing controller pos
-    Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
-
-    // drive + rotate w/ velocity
-    Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
-    // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
-
-  
+                                                                    
+                                                                    
 
 
 
@@ -74,21 +68,21 @@ public class RobotContainer {
 
           
 
-  /**
+/**
    * Clone's the angular velocity input stream and converts it to a robotRelative input stream.
    */
   SwerveInputStream driveRobotOriented = driveAngularVelocity.copy().robotRelative(true)
                                                              .allianceRelativeControl(false);
-
+                                                             
   SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                         () -> -driveController.getLeftY(),
                                                                         () -> -driveController.getLeftX())
                                                                     .withControllerRotationAxis(() -> driveController.getRawAxis(
                                                                         2))
-                                                                    .deadband(OperatorConstants.DEADBAND)
-                                                                    .scaleTranslation(0.8)
-                                                                    .allianceRelativeControl(true);
-  // Derive the heading axis with math!
+                                                                        .deadband(OperatorConstants.DEADBAND)
+                                                                        .scaleTranslation(0.8)
+                                                                        .allianceRelativeControl(true);
+                                                                        // Derive the heading axis with math!
   SwerveInputStream driveDirectAngleKeyboard     = driveAngularVelocityKeyboard.copy()
                                                                                .withControllerHeadingAxis(() ->
                                                                                                               Math.sin(
@@ -118,21 +112,36 @@ public class RobotContainer {
 
 
 
-
+    
     
   }
-
-
-
+  
+  
+  
   private void configureBindings() {
+    // drive + rotates facing controller pos
+    Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
+    
+    // drive + rotate w/ velocity
+    Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
+    // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     // swerveTuahSubsystem.setDefaultCommand(driveOnThatThang);
-
-
-
     
-
-
 
   }
 

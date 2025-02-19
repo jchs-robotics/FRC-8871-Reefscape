@@ -47,7 +47,7 @@ public class SwerveSubsystem extends SubsystemBase {
     private final SwerveDrive swerveDrive;
 
    //Maximum speed of the robot in meters per second, used to limit acceleration.
-    public double maximumSpeed = Units.feetToMeters(0); // FIXME placeholder value 
+    public double maximumSpeed = Units.feetToMeters(18); // FIXME placeholder value 
     /*
      * possible values
      * theoretical modules - ~18.8
@@ -127,16 +127,16 @@ public class SwerveSubsystem extends SubsystemBase {
      */
 
      // uses constructor from last year
-    public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg)
-    {
-       swerveDrive = new SwerveDrive(driveCfg, 
-                                    controllerCfg, 
-                                    maximumSpeed, 
-                                    new Pose2d(new Translation2d(Meter.of(2), Meter.of(0)), Rotation2d.fromDegrees(0))
-                                    ); // FIXME figure out the pose2d stuff
+    // public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg)
+    // {
+    //    swerveDrive = new SwerveDrive(driveCfg, 
+    //                                 controllerCfg, 
+    //                                 maximumSpeed, 
+    //                                 new Pose2d(new Translation2d(Meter.of(2), Meter.of(0)), Rotation2d.fromDegrees(0))
+    //                                 ); // FIXME figure out the pose2d stuff
        
         
-    }
+    // }
 
     // TODO 2025 YAGSL constructor
 
