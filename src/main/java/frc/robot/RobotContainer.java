@@ -5,12 +5,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Subsystems.SwerveSubsystem;
+import frc.robot.Commands.TurnToCommand;
 
 import swervelib.SwerveInputStream;
 import java.io.File;
@@ -27,7 +31,7 @@ public class RobotContainer {
   
   // initialize objects/variables here
   // private final XboxController driveController = new XboxController(0);
-  private final CommandXboxController driveController = new CommandXboxController(0);
+  private final XboxController driveController = new XboxController(0);
  
 
 
@@ -58,13 +62,6 @@ public class RobotContainer {
 
                                                                     
                                                                     
-
-
-
-
-/*
- * Yagsl swerve?
- */
 
           
 
@@ -100,6 +97,9 @@ public class RobotContainer {
                                                                                                                2))
                                                                                .headingWhile(true);
 
+  
+
+
 
 
   /*
@@ -107,7 +107,15 @@ public class RobotContainer {
    * Contains things such as subsystems, commands, and more
    */
   public RobotContainer() {
+
+    // pathplanner commands go here
+
+
+    drivebase.zeroGyro();
+
+  
     configureBindings();
+    
     
 
 
@@ -126,9 +134,12 @@ public class RobotContainer {
     Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
     // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
     
+    // zero gyro command
+    // FIXME placeholder button, switch to like settings button or smth
+    new JoystickButton(driveController, 2).onTrue(new InstantCommand(drivebase::zeroGyro));
     
     
-    
+    // turn to position command
     
     
     

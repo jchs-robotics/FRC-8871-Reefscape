@@ -250,7 +250,8 @@ public class SwerveSubsystem extends SubsystemBase {
     swerveDrive.driveFieldOriented(velocity);
   }
 
-// FIXME is this needed?
+// is this needed?
+// yes
   public Command driveFieldOriented(Supplier<ChassisSpeeds> velocity) {
         return run(() -> {
             swerveDrive.driveFieldOriented(velocity.get());
