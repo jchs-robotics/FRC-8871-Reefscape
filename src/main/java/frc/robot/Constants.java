@@ -1,8 +1,26 @@
 package frc.robot;
 
+import com.pathplanner.lib.config.RobotConfig;
+
 import edu.wpi.first.math.util.Units;
 
 public final class Constants {
+    
+    // constants for pathplanner
+    public static class PathPlannerConstants {
+            public static RobotConfig config; 
+
+            // {
+            // try{
+            //      config = RobotConfig.fromGUISettings();
+            //   } catch (Exception e) {
+            //     // Handle exception as needed
+            //     e.printStackTrace();
+            //   }
+            // }
+
+            // public static RobotConfig config = RobotConfig.fromGUISettings();
+    }
 
     // constants for a drive controller
     public static class OperatorConstants {

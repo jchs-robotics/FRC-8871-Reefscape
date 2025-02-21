@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -19,8 +21,13 @@ import frc.robot.Commands.TurnToCommand;
 import swervelib.SwerveInputStream;
 import java.io.File;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+
 
 public class RobotContainer {
+
+
+private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
   // initialize subsystems and commands here 
   // private final SwerveTuahSubsystem swerveTuahSubsystem = new SwerveTuahSubsystem(new File(Filesystem.getDeployDirectory(),
@@ -115,7 +122,9 @@ public class RobotContainer {
 
   
     configureBindings();
-    
+    autoChooser = AutoBuilder.buildAutoChooser(); // configures auto chooser
+    SmartDashboard.putData("Auto Chooser", autoChooser); // and lets us use smart dashboard to choose auto
+
     
 
 
@@ -157,7 +166,8 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
+    // return Commands.print("No autonomous command configured");
+    return autoChooser.getSelected();
   }
 
 
