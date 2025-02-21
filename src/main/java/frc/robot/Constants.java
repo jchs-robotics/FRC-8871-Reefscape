@@ -1,6 +1,16 @@
 package frc.robot;
 
-public class Constants {
+import edu.wpi.first.math.util.Units;
+
+public final class Constants {
+
+    // constants for a drive controller
+    public static class OperatorConstants {
+        public static final int kDriverControllerPort = 0;
+        public static final double DEADBAND = 0.05;
+    }
+
+    public static final  double MAX_SPEED = Units.feetToMeters(4.5);
 
     public class ElevatorConstants {
         public static int LEFT_ELEVATOR_ID = 5;
@@ -21,5 +31,6 @@ public class Constants {
         public static double pivotI = 0;
         public static double pivotD = 0;
     }
+
     
 }
