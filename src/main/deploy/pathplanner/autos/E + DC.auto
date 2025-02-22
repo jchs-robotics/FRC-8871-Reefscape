@@ -7,43 +7,55 @@
         {
           "type": "path",
           "data": {
-            "pathName": "infiltrate"
+            "pathName": "right start to E"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "ballz"
+            "pathName": "E to source"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "stalk the prey"
+            "pathName": "source to D"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPINJITSU"
+            "pathName": "CD to source"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPINJITSU"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPINJITSU"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPINJITSU"
+            "pathName": "source to C"
           }
         }
       ]
