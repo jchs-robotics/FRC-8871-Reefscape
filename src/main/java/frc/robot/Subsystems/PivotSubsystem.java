@@ -55,10 +55,10 @@ public class PivotSubsystem extends SubsystemBase {
 
     // default command for trigger inputs
     public void defaultTriggerCommand(double leftTrigger, double rightTrigger) {
-        if (leftTrigger < -0.05) {
+        if (leftTrigger > 0.05) {
             leftPivot.set(leftTrigger);
             rightPivot.set(leftTrigger);
-        } else if (rightTrigger < -0.05) {
+        } else if (rightTrigger > 0.05) {
             leftPivot.set(rightTrigger);
             rightPivot.set(rightTrigger);
         } else {

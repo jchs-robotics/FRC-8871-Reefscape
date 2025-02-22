@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.PivotConstants;
+import frc.robot.Subsystems.PivotSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
 import frc.robot.Commands.TurnToCommand;
 
@@ -34,11 +36,13 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
   //                                                                                        "swerve"));
 
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
-                                                                          "swerve"));                                                                                        
+                                                                          "swerve"));    
+  private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
   
   // initialize objects/variables here
   // private final XboxController driveController = new XboxController(0);
   private final XboxController driveController = new XboxController(0);
+  private final XboxController manipulatorController = new XboxController(1);
  
 
 
@@ -162,6 +166,21 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
     // swerveTuahSubsystem.setDefaultCommand(driveOnThatThang);
     
+
+
+    /*
+     * Manipulator commands and inputs
+     */
+
+     pivotSubsystem.defaultTriggerCommand(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
+
+
+
+
+
+
+
+
 
   }
 
