@@ -38,6 +38,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                           "swerve"));    
   private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   
   // initialize objects/variables here
   // private final XboxController driveController = new XboxController(0);
@@ -173,7 +174,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
      */
 
      pivotSubsystem.defaultTriggerCommand(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
-
+     elevatorSubsystem.defaultButtonCommand(manipulatorController.getXButton(), manipulatorController.getAButton());
 
 
 
