@@ -38,6 +38,12 @@ public final class Constants {
         public static double elevatorI = 0;
         public static double elevatorD = 0;
 
+        // TODO
+        public static double STOW_POSITION = 0;
+        public static double L2_POSITION = 0;
+        public static double L3_POSITION = 0;
+        public static double L4_POSITION = 0;
+
         public static double manualSpeed = 0.9;
     }
 
@@ -48,6 +54,13 @@ public final class Constants {
         public static double pivotP = 0;
         public static double pivotI = 0;
         public static double pivotD = 0;
+
+        // TODO
+        public static double STOW_POSITION = 0;
+        public static double INTAKE_POSITION = 0;
+        public static double SCORE_POSITION = 0;
+        
+        public static double manualSpeed = 0.9;
     }
 
     

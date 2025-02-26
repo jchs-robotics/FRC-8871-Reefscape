@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -16,8 +17,10 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.PivotConstants;
+import frc.robot.Subsystems.ElevatorSubsystem;
 import frc.robot.Subsystems.PivotSubsystem;
 import frc.robot.Subsystems.SwerveSubsystem;
+import frc.robot.Commands.ElevatorPIDCommand;
 import frc.robot.Commands.TurnToCommand;
 
 import swervelib.SwerveInputStream;
@@ -178,6 +181,28 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
 
 
+     /*
+      * set elevator positions
+      *
+      * POV button pos
+      * up (L4) - 0
+      * right (L3) - 90
+      * down (L2) - 180
+      * left (stow) - 270
+      */
+
+      // stow
+      new POVButton(manipulatorController, 180).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
+                                                                                  Constants.ElevatorConstants.STOW_POSITION));
+      // L2
+      new POVButton(manipulatorController, 270).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
+                                                                                  Constants.ElevatorConstants.L2_POSITION));
+      // L3
+      new POVButton(manipulatorController, 90).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
+                                                                                  Constants.ElevatorConstants.L3_POSITION));
+      // L4
+      new POVButton(manipulatorController, 0).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
+                                                                                  Constants.ElevatorConstants.L4_POSITION));
 
 
 
