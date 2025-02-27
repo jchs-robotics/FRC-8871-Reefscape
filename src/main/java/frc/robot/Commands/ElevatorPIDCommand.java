@@ -32,7 +32,7 @@ public class ElevatorPIDCommand extends Command {
 
     @Override
     public void execute() {
-        double speed = pidController.calculate(elevatorSubsystem.leftEncoder.getPosition());
+        double speed = pidController.calculate(elevatorSubsystem.leftEncoder);
         elevatorSubsystem.setMotors(speed);
     }
 

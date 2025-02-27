@@ -33,7 +33,7 @@ public class PivotPIDCommand extends Command {
 
     @Override
     public void execute() {
-        double speed = pidController.calculate(pivotSubsystem.leftEncoder.getPosition());
+        double speed = pidController.calculate(pivotSubsystem.leftEncoder);
         pivotSubsystem.setMotors(speed);
     }
 

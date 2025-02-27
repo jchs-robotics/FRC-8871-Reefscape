@@ -1,9 +1,13 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 
+import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -13,12 +17,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     /*
      * Initialize motor and encoder objects
      */
-    private final SparkMax leftElevator = new SparkMax(Constants.ElevatorConstants.LEFT_ELEVATOR_ID, MotorType.kBrushless);
-    private final SparkMax rightElevator = new SparkMax(Constants.ElevatorConstants.RIGHT_ELEVATOR_ID, MotorType.kBrushless);
+    private final TalonFX leftElevator = new TalonFX(Constants.ElevatorConstants.LEFT_ELEVATOR_ID);
+    private final TalonFX rightElevator = new TalonFX(Constants.ElevatorConstants.RIGHT_ELEVATOR_ID);
 
     // TODO only need one, can comment whichever one sucks more
-    public final RelativeEncoder leftEncoder = leftElevator.getEncoder();
-    public final RelativeEncoder rightEncoder = rightElevator.getEncoder();
+    public final double leftEncoder = leftElevator.getPosition().getValueAsDouble();
+    public final double rightEncoder = rightElevator.getPosition().getValueAsDouble();
 
     
 
@@ -27,7 +31,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // telemetry data goes here
-    } 
+        // System.out.println("Left elevator pos: " + leftEncoder);
+        // System.out.println("Right elevator pos: " + rightEncoder);
+        SmartDashboard.putNumber("Left elevator encoder: ", leftEncoder);
+        SmartDashboard.putNumber("Right elevator encoder: ", rightEncoder);
+    }
 
 
     public void setMotors(double speed) {
@@ -41,7 +49,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
         //TODO idk if getPosition() is the correct method for this. we need the encoder ticks to compare
 
-        if (leftEncoder.getPosition() < (endpoint + 5) && leftEncoder.getPosition() > (endpoint - 5)) {
+        if (leftEncoder < (endpoint + 5) && leftEncoder > (endpoint - 5)) {
             return true;
         } else {
             return false;
