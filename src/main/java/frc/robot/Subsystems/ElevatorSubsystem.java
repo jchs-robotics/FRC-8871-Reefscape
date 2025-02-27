@@ -37,9 +37,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Right elevator encoder: ", rightEncoder);
     }
 
-
+// FIXME test which side needs to be rotated (do it in tuner)
     public void setMotors(double speed) {
-        leftElevator.set(speed);
+        leftElevator.set(-speed);
         rightElevator.set(speed);
     }
 
@@ -74,13 +74,14 @@ public class ElevatorSubsystem extends SubsystemBase {
         }
     } */
 
+    // FIXME test which side needs to be rotated (do it in tuner)
     // TODO default command for button inputs
     public void defaultButtonCommand(boolean upInput, boolean downInput) {
         if (upInput) {
-            leftElevator.set(Constants.ElevatorConstants.manualSpeed);
+            leftElevator.set(-Constants.ElevatorConstants.manualSpeed);
             rightElevator.set(Constants.ElevatorConstants.manualSpeed);
         } else if (downInput) {
-            leftElevator.set(-Constants.ElevatorConstants.manualSpeed);
+            leftElevator.set(Constants.ElevatorConstants.manualSpeed);
             rightElevator.set(-Constants.ElevatorConstants.manualSpeed);
         } else {
             leftElevator.set(0);

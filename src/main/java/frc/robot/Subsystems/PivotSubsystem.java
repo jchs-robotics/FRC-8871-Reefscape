@@ -35,8 +35,9 @@ public class PivotSubsystem extends SubsystemBase {
     } 
 
 
+    // FIXME test which side needs to be rotated (do it in tuner)
     public void setMotors(double speed) {
-        leftPivot.set(speed);
+        leftPivot.set(-speed);
         rightPivot.set(speed);
     }
 
@@ -57,15 +58,15 @@ public class PivotSubsystem extends SubsystemBase {
     }
 
 
-
+// FIXME test which side needs to be rotated (do it in tuner)
     // default command for trigger inputs
     public void defaultTriggerCommand(double leftTrigger, double rightTrigger) {
         if (leftTrigger > 0.05) {
-            leftPivot.set(leftTrigger);
+            leftPivot.set(-leftTrigger);
             rightPivot.set(leftTrigger);
         } else if (rightTrigger > 0.05) {
             leftPivot.set(rightTrigger);
-            rightPivot.set(rightTrigger);
+            rightPivot.set(-rightTrigger);
         } else {
             leftPivot.set(0);
             rightPivot.set(0);

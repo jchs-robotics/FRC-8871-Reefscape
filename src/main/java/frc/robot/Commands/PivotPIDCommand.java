@@ -47,4 +47,4 @@ public class PivotPIDCommand extends Command {
     public boolean isFinished() {
         return pivotSubsystem.bleh(endpoint);
     }
-}
+} 
