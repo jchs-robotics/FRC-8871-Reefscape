@@ -147,8 +147,6 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
 
 
-    
-    
   }
   
   
@@ -163,7 +161,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
     
     // zero gyro command
     // TODO placeholder button, switch to like settings button or smth
-    new JoystickButton(driveController, 2).onTrue(new InstantCommand(drivebase::zeroGyro));
+    new JoystickButton(driveController, 7).onTrue(new InstantCommand(drivebase::zeroGyro));
     
     
     // turn to position command

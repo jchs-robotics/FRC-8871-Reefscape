@@ -119,7 +119,7 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveDrive.setHeadingCorrection(true); // Heading correction should only be used while controlling the robot via angle.
         AHRS navx = (AHRS)swerveDrive.swerveDriveConfiguration.imu.getIMU();
         swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
-    // setupPathPlanner(); // FIXME will do this later
+        setupPathPlanner(); // FIXME will do this later
 
     } // end of configuring files/swerve
 
