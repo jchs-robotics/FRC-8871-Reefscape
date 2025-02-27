@@ -53,6 +53,16 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
 
 
+
+  // TODO pathplanner named commands
+  // elevator stow
+  // pivot intake
+  // pivot score
+  // elevator L4
+
+
+
+
   /*
    *  Swerve  code
    */
@@ -152,7 +162,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
     // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
     
     // zero gyro command
-    // FIXME placeholder button, switch to like settings button or smth
+    // TODO placeholder button, switch to like settings button or smth
     new JoystickButton(driveController, 2).onTrue(new InstantCommand(drivebase::zeroGyro));
     
     
