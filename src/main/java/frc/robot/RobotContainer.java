@@ -45,14 +45,14 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   
   // initialize objects/variables here
-  // private final XboxController driveController = new XboxController(0);
+  // private final CommandXboxController driveController = new CommandXboxController(0);
   private final XboxController driveController = new XboxController(0);
   private final CommandXboxController manipulatorController = new CommandXboxController(1);
   // private final CommandXboxController commandManipulatorController = new CommandXboxController(1);
   // private final GenericHID manipulatorController = new GenericHID(1);
 
-  // Trigger rightTrigger = commandManipulatorController.rightTrigger();
-
+  
+  // private final double driveSpeed = 1;
 
 
 
@@ -65,6 +65,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
   // elevator L4
 
 
+  
 
 
   /*
@@ -75,8 +76,8 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
    */
    SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),               // get the swerve drive object and get the controller joystick positions
-                                                                            () -> -driveController.getLeftY(),   // multiplied by -1 because joysticks are inverted
-                                                                            () -> -driveController.getLeftX())   //                                                           
+                                                                            () -> Math.pow(-driveController.getLeftY(), 3),   // multiplied by -1 because joysticks are inverted
+                                                                            () -> Math.pow(-driveController.getLeftX(), 3))   // multiplied by a speed control constant                                                          
                                                                           .withControllerRotationAxis(driveController::getRightX) // rotation axis (sideways movement of joystick)
                                                                           .deadband(OperatorConstants.DEADBAND) // deadband so no stick drift
                                                                           .scaleTranslation(0.8) // TODO learn this
@@ -141,18 +142,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
 
     drivebase.zeroGyro();
-
-
-    // pivotSubsystem.setDefaultCommand(pivotSubsystem.manual(manipulatorController.getLeftTriggerAxis(),
-    //                                                        manipulatorController.getRightTriggerAxis()
-    //                                                       ));
-    // // pivotSubsystem.setDefaultCommand(pivotSubsystem.manual(manipulatorController.getRawAxis(5)));
-    // elevatorSubsystem.setDefaultCommand(elevatorSubsystem.manual(manipulatorController.getXButton(), 
-    //                                                              manipulatorController.getAButton()
-    //                                                             ));
-    
-    // pivotSubsystem.manualControl(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
-                                                              
+                                                      
     configureBindings();
     autoChooser = AutoBuilder.buildAutoChooser(); // configures auto chooser
     SmartDashboard.putData("Auto Chooser", autoChooser); // and lets us use smart dashboard to choose auto
@@ -171,12 +161,15 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
     
     // drive + rotate w/ velocity
     Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
-    // Command driveOnThatThang = swerveTuahSubsystem.driveFieldOriented(driveAngularVelocity);
-    
+    // Command driveFieldOrientedAngularVelocity = drivebase.driveFieldOriented(driveRobotOriented);
+
+
+
+    // FIXM maybe this is the issue
     // zero gyro command
-    // TODO placeholder button, switch to like settings button or smth
     new JoystickButton(driveController, 7).onTrue(new InstantCommand(drivebase::zeroGyro));
-    
+    // driveController.a().onTrue(new InstantCommand(drivebase::zeroGyro));
+
     
     // turn to position command
     
@@ -190,38 +183,26 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
     
     
     drivebase.setDefaultCommand(driveFieldOrientedAngularVelocity);
-    // swerveTuahSubsystem.setDefaultCommand(driveOnThatThang);
     
-
-
+    
+    
     /*
-     * Manipulator commands and inputs
-     */
-
-
-
-    //  Command defaultPivot = pivotSubsystem.defaultTriggerCommand(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
-    //  Command defaultElevator = elevatorSubsystem.defaultButtonCommand(manipulatorController.getXButton(), manipulatorController.getAButton());
-
-
+    * Manipulator commands and inputs
+    */
+  
     
-    // FIXME this pivot worked when having the joystick input
-    //  Command defaultPivot = pivotSubsystem.manual(manipulatorController.getRawAxis(3), manipulatorController.getRawAxis(4));
+    // pivot up / down
+    manipulatorController.rightTrigger().onTrue(new InstantCommand(pivotSubsystem::up))
+                                          .onFalse(new InstantCommand(pivotSubsystem::stop));
+    manipulatorController.leftTrigger().onTrue(new InstantCommand(pivotSubsystem::down))
+                                       .onFalse(new InstantCommand(pivotSubsystem::stop));
+    // elevator up / down
+    manipulatorController.x().onTrue(new InstantCommand(elevatorSubsystem::up))
+                             .onFalse(new InstantCommand(elevatorSubsystem::stop));
     
-    //  Command defaultElevator = elevatorSubsystem.defaultButtonCommand(manipulatorController.getRawButton(3), manipulatorController.getRawButton(1));
-
-    // pivotSubsystem.manualPivot(manipulatorController.getRawAxis(2), 
-    //                           manipulatorController.getRawAxis(3));
-
-
-
-    manipulatorController.rightTrigger().onTrue(new InstantCommand(pivotSubsystem::up)).onFalse(new InstantCommand(pivotSubsystem::stop));
-    manipulatorController.leftTrigger().onTrue(new InstantCommand(pivotSubsystem::down)).onFalse(new InstantCommand(pivotSubsystem::stop));
+    manipulatorController.a().onTrue(new InstantCommand(elevatorSubsystem::down))
+                             .onFalse(new InstantCommand(elevatorSubsystem::stop));
     
-
-
-    // elevatorSubsystem.setDefaultCommand(defaultElevator);
-
 
 
 

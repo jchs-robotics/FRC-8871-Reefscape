@@ -15,6 +15,7 @@ import com.studica.frc.AHRS;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -111,7 +112,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
             swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed,
                                                   new Pose2d(new Translation2d(Meter.of(1), Meter.of(4)), 
-                                                  Rotation2d.fromDegrees(0))); // includes pose2d (from yagsl)
+                                                  Rotation2d.fromDegrees(0))
+                                                                        ); // includes pose2d (from yagsl)
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -119,7 +121,7 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveDrive.setHeadingCorrection(true); // Heading correction should only be used while controlling the robot via angle.
         AHRS navx = (AHRS)swerveDrive.swerveDriveConfiguration.imu.getIMU();
         swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
-        setupPathPlanner(); // FIXME will do this later
+        setupPathPlanner();
 
     } // end of configuring files/swerve
 
@@ -311,7 +313,7 @@ public class SwerveSubsystem extends SubsystemBase {
             swerveDrive.driveFieldOriented(velocity.get());
         });
     }
-
+    
   /**
    * Drive according to the chassis robot oriented velocity.
    *
@@ -341,6 +343,10 @@ public class SwerveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("LimelightX", x);
     SmartDashboard.putNumber("LimelightY", y);
     SmartDashboard.putNumber("LimelightArea", area);*/
+
+    SmartDashboard.putNumber("Robot degrees", getHeading().getDegrees());
+    SmartDashboard.putNumber("Robot radians", getHeading().getRadians());
+
   }
 
   @Override
@@ -579,5 +585,4 @@ public class SwerveSubsystem extends SubsystemBase {
   }
     // ~~~~~~~~~~ drive commands ~~~~~~~~~~ //
 
-    
 } // end of subsystem
