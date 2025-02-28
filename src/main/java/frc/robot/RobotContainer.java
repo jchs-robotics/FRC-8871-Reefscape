@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,8 +47,11 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
   // initialize objects/variables here
   // private final XboxController driveController = new XboxController(0);
   private final XboxController driveController = new XboxController(0);
-  private final XboxController manipulatorController = new XboxController(1);
- 
+  private final CommandXboxController manipulatorController = new CommandXboxController(1);
+  // private final CommandXboxController commandManipulatorController = new CommandXboxController(1);
+  // private final GenericHID manipulatorController = new GenericHID(1);
+
+  // Trigger rightTrigger = commandManipulatorController.rightTrigger();
 
 
 
@@ -138,7 +142,17 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
 
     drivebase.zeroGyro();
 
-  
+
+    // pivotSubsystem.setDefaultCommand(pivotSubsystem.manual(manipulatorController.getLeftTriggerAxis(),
+    //                                                        manipulatorController.getRightTriggerAxis()
+    //                                                       ));
+    // // pivotSubsystem.setDefaultCommand(pivotSubsystem.manual(manipulatorController.getRawAxis(5)));
+    // elevatorSubsystem.setDefaultCommand(elevatorSubsystem.manual(manipulatorController.getXButton(), 
+    //                                                              manipulatorController.getAButton()
+    //                                                             ));
+    
+    // pivotSubsystem.manualControl(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
+                                                              
     configureBindings();
     autoChooser = AutoBuilder.buildAutoChooser(); // configures auto chooser
     SmartDashboard.putData("Auto Chooser", autoChooser); // and lets us use smart dashboard to choose auto
@@ -184,8 +198,39 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
      * Manipulator commands and inputs
      */
 
-     pivotSubsystem.defaultTriggerCommand(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
-     elevatorSubsystem.defaultButtonCommand(manipulatorController.getXButton(), manipulatorController.getAButton());
+
+
+    //  Command defaultPivot = pivotSubsystem.defaultTriggerCommand(manipulatorController.getLeftTriggerAxis(), manipulatorController.getRightTriggerAxis());
+    //  Command defaultElevator = elevatorSubsystem.defaultButtonCommand(manipulatorController.getXButton(), manipulatorController.getAButton());
+
+
+    
+    // FIXME this pivot worked when having the joystick input
+    //  Command defaultPivot = pivotSubsystem.manual(manipulatorController.getRawAxis(3), manipulatorController.getRawAxis(4));
+    
+    //  Command defaultElevator = elevatorSubsystem.defaultButtonCommand(manipulatorController.getRawButton(3), manipulatorController.getRawButton(1));
+
+    // pivotSubsystem.manualPivot(manipulatorController.getRawAxis(2), 
+    //                           manipulatorController.getRawAxis(3));
+
+
+
+    manipulatorController.rightTrigger().onTrue(new InstantCommand(pivotSubsystem::up)).onFalse(new InstantCommand(pivotSubsystem::stop));
+    manipulatorController.leftTrigger().onTrue(new InstantCommand(pivotSubsystem::down)).onFalse(new InstantCommand(pivotSubsystem::stop));
+    
+
+
+    // elevatorSubsystem.setDefaultCommand(defaultElevator);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -198,7 +243,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
       * down (L2) - 180
       * left (stow) - 270
       */
-
+/* 
       // stow
       new POVButton(manipulatorController, 180).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
                                                                                   Constants.ElevatorConstants.STOW_POSITION));
@@ -211,7 +256,7 @@ private final SendableChooser<Command> autoChooser; // lets us choose our autos
       // L4
       new POVButton(manipulatorController, 0).onTrue(new ElevatorPIDCommand(elevatorSubsystem, 
                                                                                   Constants.ElevatorConstants.L4_POSITION));
-
+*/
 
 
 

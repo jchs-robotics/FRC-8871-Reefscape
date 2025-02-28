@@ -1,6 +1,9 @@
 package frc.robot.Subsystems;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+
+import java.net.ContentHandler;
+
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.RelativeEncoder;
@@ -26,15 +29,28 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     
 
+    
+
     public ElevatorSubsystem() {}
+
+
+
+    private double leftElevatorPos() {
+        return leftElevator.getPosition().getValueAsDouble();
+    }
+    private double rightElevatorPos() {
+        return rightElevator.getPosition().getValueAsDouble();
+    }
+
+
 
     @Override
     public void periodic() {
         // telemetry data goes here
         // System.out.println("Left elevator pos: " + leftEncoder);
         // System.out.println("Right elevator pos: " + rightEncoder);
-        SmartDashboard.putNumber("Left elevator encoder: ", leftEncoder);
-        SmartDashboard.putNumber("Right elevator encoder: ", rightEncoder);
+        SmartDashboard.putNumber("Left elevator encoder: ", leftElevatorPos());
+        SmartDashboard.putNumber("Right elevator encoder: ", rightElevatorPos());
     }
 
 // FIXME test which side needs to be rotated (do it in tuner)
@@ -76,17 +92,18 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     // FIXME test which side needs to be rotated (do it in tuner)
     // TODO default command for button inputs
-    public void defaultButtonCommand(boolean upInput, boolean downInput) {
-        if (upInput) {
-            leftElevator.set(-Constants.ElevatorConstants.manualSpeed);
-            rightElevator.set(Constants.ElevatorConstants.manualSpeed);
-        } else if (downInput) {
-            leftElevator.set(Constants.ElevatorConstants.manualSpeed);
-            rightElevator.set(-Constants.ElevatorConstants.manualSpeed);
-        } else {
-            leftElevator.set(0);
-            rightElevator.set(0);
-        }
+    public Command manual(boolean upInput, boolean downInput) {
+
+        return run (() -> {
+            if (upInput) {
+                setMotors(Constants.ElevatorConstants.manualSpeed);
+            } else if (downInput) {
+                setMotors(-Constants.ElevatorConstants.manualSpeed);
+            } else {
+                setMotors(0);
+            }
+        });
+
     }
 
 
@@ -98,4 +115,4 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 
     
-} 
+}
