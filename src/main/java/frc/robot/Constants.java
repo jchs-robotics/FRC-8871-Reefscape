@@ -66,7 +66,7 @@ public final class Constants {
         public static double INTAKE_POSITION = 0;
         public static double SCORE_POSITION = 0;
         
-        public static double manualSpeed = 0.90;
+        public static double manualSpeed = 0.6;
     }
 
     
