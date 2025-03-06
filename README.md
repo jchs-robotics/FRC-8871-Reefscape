@@ -2,28 +2,28 @@
 This is the official repository for FRC team 8871, Saber Dynamics, 2025 Reefscape code.
 
 # TODO
-
-- Assign laptop numbers
-- Add names to GitHub account
-- Select a subsystem to join (elevator or pivot)
+- PID TUNING
+- - Drive
+  - Pivot 
 
 ## Subsystems
 ### Pivot subsystem
-- Write functions
+- PID Tuning through relative encoders
+- Use a pigeon for PID
 ### Elevator subsystem
-- Write functions
+- Scrapping elevator
 ### Swerve subsystem
-- idk
+- Drive tuning
+- Autonomous
 
 ## Commands
 ### Pivot commands
 - PID command
 ### Elevator commands
-- PID command
-- Default command
+- are eye pee
 - Default command
 ### Drive command
-- Turn to command
+- ~~Turn to command~~
 - Default command
 
 
