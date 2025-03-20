@@ -1,10 +1,11 @@
 package frc.robot.Subsystems;
 
-import com.revrobotics.spark.SparkLowLevel.MotorType;
+
+import java.net.ContentHandler;
+
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkMax;
+
 
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,20 +27,33 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     
 
+    
+
     public ElevatorSubsystem() {}
+
+
+
+    private double leftElevatorPos() {
+        return leftElevator.getPosition().getValueAsDouble();
+    }
+    private double rightElevatorPos() {
+        return rightElevator.getPosition().getValueAsDouble();
+    }
+
+
 
     @Override
     public void periodic() {
         // telemetry data goes here
         // System.out.println("Left elevator pos: " + leftEncoder);
         // System.out.println("Right elevator pos: " + rightEncoder);
-        SmartDashboard.putNumber("Left elevator encoder: ", leftEncoder);
-        SmartDashboard.putNumber("Right elevator encoder: ", rightEncoder);
+        SmartDashboard.putNumber("Left elevator encoder: ", leftElevatorPos());
+        SmartDashboard.putNumber("Right elevator encoder: ", rightElevatorPos());
     }
 
 // FIXME test which side needs to be rotated (do it in tuner)
     public void setMotors(double speed) {
-        leftElevator.set(-speed);
+        leftElevator.set(-speed); 
         rightElevator.set(speed);
     }
 
@@ -60,34 +74,17 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
 
-    // default command for trigger inputs
-    /* public void defaultTriggerCommand(double leftJoystick, double rightJoystick) {
-        if (leftJoystick < -0.05) {
-            leftElevator.set(leftJoystick);
-            rightElevator.set(leftJoystick);
-        } else if (rightJoystick < -0.05) {
-            leftElevator.set(rightJoystick);
-            rightElevator.set(rightJoystick);
-        } else {
-            leftElevator.set(0);
-            rightElevator.set(0);
-        }
-    } */
-
-    // FIXME test which side needs to be rotated (do it in tuner)
-    // TODO default command for button inputs
-    public void defaultButtonCommand(boolean upInput, boolean downInput) {
-        if (upInput) {
-            leftElevator.set(-Constants.ElevatorConstants.manualSpeed);
-            rightElevator.set(Constants.ElevatorConstants.manualSpeed);
-        } else if (downInput) {
-            leftElevator.set(Constants.ElevatorConstants.manualSpeed);
-            rightElevator.set(-Constants.ElevatorConstants.manualSpeed);
-        } else {
-            leftElevator.set(0);
-            rightElevator.set(0);
-        }
+    // default commands
+    public void up() {
+        setMotors(Constants.ElevatorConstants.manualSpeed);
     }
+    public void down() {
+        setMotors(-Constants.ElevatorConstants.manualSpeed);
+    }
+    public void stop() {
+        setMotors(0);
+    }
+
 
 
     @Override
@@ -98,4 +95,4 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 
     
-} 
+}

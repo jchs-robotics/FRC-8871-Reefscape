@@ -49,7 +49,7 @@ public final class Constants {
         public static double L3_POSITION = 0;
         public static double L4_POSITION = 0;
 
-        public static double manualSpeed = 0.1;
+        public static double manualSpeed = 0.2;
     }
 
     public class PivotConstants {
@@ -66,7 +66,7 @@ public final class Constants {
         public static double INTAKE_POSITION = 0;
         public static double SCORE_POSITION = 0;
         
-        public static double manualSpeed = 0.1;
+        public static double manualSpeed = 0.6;
     }
 
     

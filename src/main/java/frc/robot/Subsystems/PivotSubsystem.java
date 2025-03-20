@@ -1,12 +1,9 @@
 package frc.robot.Subsystems;
 
-import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import static edu.wpi.first.units.Units.RPM;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,18 +17,33 @@ public class PivotSubsystem extends SubsystemBase {
     private final TalonFX leftPivot = new TalonFX(Constants.PivotConstants.LEFT_PIVOT_ID);
     private final TalonFX rightPivot = new TalonFX(Constants.PivotConstants.RIGHT_PIVOT_ID);
 
+    
+
     // TODO only need one, can comment whichever one sucks more
     public final double leftEncoder = leftPivot.getPosition().getValueAsDouble();
     public final double rightEncoder = rightPivot.getPosition().getValueAsDouble();
 
     public PivotSubsystem() {}
 
+
+    public double leftPivotPos() {
+        return leftPivot.getPosition().getValueAsDouble();
+    }
+    private double rightPivotPos() {
+        return rightPivot.getPosition().getValueAsDouble();
+    }
+
+
+
     @Override
     public void periodic() {
         // telemetry data goes here
+
+        // System.out.println("left pivot encoder: " + leftEncoder);
         
-        SmartDashboard.putNumber("Left pivot encoder: ", leftEncoder);
-        SmartDashboard.putNumber("Right pivot encoder: ", rightEncoder);
+        
+        SmartDashboard.putNumber("Left pivot encoder: ", leftPivotPos());
+        SmartDashboard.putNumber("Right pivot encoder: ", rightPivotPos());
     } 
 
 
@@ -58,20 +70,22 @@ public class PivotSubsystem extends SubsystemBase {
     }
 
 
-// FIXME test which side needs to be rotated (do it in tuner)
-    // default command for trigger inputs
-    public void defaultTriggerCommand(double leftTrigger, double rightTrigger) {
-        if (leftTrigger > 0.05) {
-            leftPivot.set(-leftTrigger);
-            rightPivot.set(leftTrigger);
-        } else if (rightTrigger > 0.05) {
-            leftPivot.set(rightTrigger);
-            rightPivot.set(-rightTrigger);
-        } else {
-            leftPivot.set(0);
-            rightPivot.set(0);
-        }
+    public void manualControl(double leftTrigger, double rightTrigger) {
+        setMotors(rightTrigger - leftTrigger);
     }
+
+
+
+    public void up() {
+        setMotors(Constants.PivotConstants.manualSpeed);
+    }
+    public void down() {
+        setMotors(-Constants.PivotConstants.manualSpeed);
+    }
+    public void stop() {
+        setMotors(0);
+    }
+
 
 
     @Override
